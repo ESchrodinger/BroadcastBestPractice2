@@ -13,7 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class BaseActivity extends AppCompatActivity {
 
-    private ForceOfflineReceiver receiver;
+    public ForceOfflineReceiver receiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -31,7 +31,7 @@ public class BaseActivity extends AppCompatActivity {
     protected void onResume(){
         super.onResume();
         IntentFilter intentFilter = new IntentFilter();
-        intentFilter.addAction("com.example.broadcastbestPractice.FORCE_OFFLINE");
+        intentFilter.addAction("com.example.broadcastbestpractice.FORCE_OFFLINE");
         receiver = new ForceOfflineReceiver();
         registerReceiver(receiver, intentFilter);
 
@@ -46,23 +46,23 @@ public class BaseActivity extends AppCompatActivity {
         }
     }
 
-    class ForceOfflineReceiver extends BroadcastReceiver{
-
-        @Override
-        public void onReceive(final Context context, Intent intent){
-            AlertDialog.Builder builder = new AlertDialog.Builder(context);
-            builder.setTitle("Warning");
-            builder.setMessage("You are forced to be offline. Please try to login again");
-            builder.setCancelable(false);
-            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-                    ActivityCollector.finishAll();
-                    Intent intent = new Intent(context, LoginActivity.class);
-                    context.startActivity(intent);
-                }
-            });
-            builder.show();
-        }
-    }
+//    class ForceOfflineReceiver extends BroadcastReceiver{
+//
+//        @Override
+//        public void onReceive(final Context context, Intent intent){
+//            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+//            builder.setTitle("Warning");
+//            builder.setMessage("You are forced to be offline. Please try to login again");
+//            builder.setCancelable(false);
+//            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+//                @Override
+//                public void onClick(DialogInterface dialogInterface, int i) {
+//                    ActivityCollector.finishAll();
+//                    Intent intent = new Intent(context, LoginActivity.class);
+//                    context.startActivity(intent);
+//                }
+//            });
+//            builder.show();
+//        }
+//    }
 }
